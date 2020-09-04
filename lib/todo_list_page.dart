@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:todo_app/add_todo_page.dart';
 import 'package:todo_app/todo_list_model.dart';
 
 class TodoListPage extends StatelessWidget {
@@ -22,6 +23,15 @@ class TodoListPage extends StatelessWidget {
                 )
                 .toList();
             return ListView(children: listTiles);
+          },
+        ),
+        floatingActionButton: FloatingActionButton(
+          child: Icon(Icons.add),
+          onPressed: () async {
+            await Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => AddTodoPage()),
+            );
           },
         ),
       ),
