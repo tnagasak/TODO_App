@@ -18,6 +18,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      theme: ThemeData(
+          primarySwatch: Colors.yellow,
+      ),
       home: ChangeNotifierProvider<MainModel>(
         create: (_) => MainModel(),
         child: Scaffold(
@@ -39,7 +42,7 @@ class MyApp extends StatelessWidget {
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => TodoList()),
+                          MaterialPageRoute(builder: (context) => TodoListPage()),
                         );
                       },
                     ),
@@ -48,7 +51,12 @@ class MyApp extends StatelessWidget {
               );
             }
           ),
-
+          floatingActionButton: FloatingActionButton(
+            child: Icon(Icons.add),
+            onPressed: () {
+              // todo
+            },
+          ),
         ),
       ),
     );
