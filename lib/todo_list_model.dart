@@ -7,7 +7,7 @@ class TodoListModel extends ChangeNotifier {
 
   Future fetchLists() async {
     final docs = await FirebaseFirestore.instance.collection('lists').get();
-    final lists = docs.docs.map((doc) => Todo(doc.data()['title'])).toList();
+    final lists = docs.docs.map((doc) => Todo(doc)).toList();
     this.lists = lists;
     notifyListeners();
   }

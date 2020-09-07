@@ -19,21 +19,43 @@ class TodoListPage extends StatelessWidget {
                 .map(
                   (list) => ListTile(
                     title: Text(list.title),
+                    trailing: IconButton(
+                      icon: Icon(Icons.edit),
+                      onPressed: () async {
+                        await Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => AddTodoPage(
+                              todo: list,
+                            ),
+                            fullscreenDialog: true,
+                          ),
+                        );
+                        model.fetchLists();
+                      },
+                    ),
                   ),
                 )
                 .toList();
             return ListView(children: listTiles);
           },
         ),
-        floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.add),
-          onPressed: () async {
-            await Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => AddTodoPage()),
-            );
-          },
-        ),
+        floatingActionButton:
+            Consumer<TodoListModel>(builder: (context, model, child) {
+          return FloatingActionButton(
+            child: Icon(Icons.add),
+            onPressed: () async {
+              await Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => AddTodoPage(),
+                  fullscreenDialog: true,
+                ),
+              );
+              model.fetchLists();
+            },
+          );
+        }),
       ),
     );
   }
