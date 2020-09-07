@@ -8,4 +8,5 @@ class Todo {
 
   String documentID;
   String title;
+  String color = 'white';
 }

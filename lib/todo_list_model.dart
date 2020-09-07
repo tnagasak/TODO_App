@@ -11,4 +11,11 @@ class TodoListModel extends ChangeNotifier {
     this.lists = lists;
     notifyListeners();
   }
+
+  Future deleteTodo(Todo todo) async {
+    await FirebaseFirestore.instance
+        .collection('lists')
+        .doc(todo.documentID)
+        .delete();
+  }
 }

@@ -1,3 +1,5 @@
+//追加、更新ページ
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_app/add_todo_model.dart';
@@ -38,6 +40,7 @@ class AddTodoPage extends StatelessWidget {
                     ),
                   ),
                   RaisedButton(
+                    // isUpdateがtrueかどうかで、updateメソッドを使うか、addメソッドを使うか場合わけ
                     child: Text(isUpdate ? '変更する' : '追加する'),
                     onPressed: () async {
                       if (isUpdate) {
@@ -56,6 +59,7 @@ class AddTodoPage extends StatelessWidget {
     );
   }
 
+  //追加時のメソッド
   Future addTodo(AddTodoModel model, BuildContext context) async {
     try {
       await model.addTodoToFirebase();
@@ -79,6 +83,7 @@ class AddTodoPage extends StatelessWidget {
       );
       Navigator.of(context).pop();
     } catch (e) {
+      //エラー時の処理
       showDialog<void>(
         context: context,
         barrierDismissible: false, // user must tap button!
@@ -99,6 +104,7 @@ class AddTodoPage extends StatelessWidget {
     }
   }
 
+  //更新時のメソッド
   Future updateTodo(AddTodoModel model, BuildContext context) async {
     try {
       await model.updateTodo(todo);
@@ -122,6 +128,7 @@ class AddTodoPage extends StatelessWidget {
       );
       Navigator.of(context).pop();
     } catch (e) {
+      //エラー時の処理
       showDialog<void>(
         context: context,
         barrierDismissible: false, // user must tap button!
